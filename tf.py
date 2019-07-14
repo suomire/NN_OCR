@@ -7,12 +7,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-
 def plot_image(i, predictions_array, true_label, img):
     predictions_array, true_label, img = predictions_array[i], true_label[i], img[i]
     plt.grid(False)
     plt.xticks([])
     plt.yticks([])
+
 
     plt.imshow(img, cmap=plt.cm.binary)
 
@@ -39,7 +39,6 @@ def plot_value_array(i, predictions_array, true_label):
 
     thisplot[predictions_label].set_color('red')
     thisplot[true_label].set_color('blue')
-
 
 
 fashion_mnist = keras.datasets.fashion_mnist
@@ -87,19 +86,19 @@ predictions = model.predict(test_images)
 # Color correct predictions in blue, incorrect predictions in red
 num_rows = 5
 num_cols = 3
-num_images = num_rows*num_cols
-plt.figure(figsize=(2*2*num_cols, 2*num_rows))
+num_images = num_rows * num_cols
+plt.figure(figsize=(2 * 2 * num_cols, 2 * num_rows))
 for i in range(num_images):
-  plt.subplot(num_rows, 2*num_cols, 2*i+1)
-  plot_image(i, predictions, test_labels, test_images)
-  plt.subplot(num_rows, 2*num_cols, 2*i+2)
-  plot_value_array(i, predictions, test_labels)
+    plt.subplot(num_rows, 2 * num_cols, 2 * i + 1)
+    plot_image(i, predictions, test_labels, test_images)
+    plt.subplot(num_rows, 2 * num_cols, 2 * i + 2)
+    plot_value_array(i, predictions, test_labels)
 plt.show()
 
 # Grab an image from the test dataset
 img = test_images[0]
 # Add the image to a batch where it's the only member.
-img = (np.expand_dims(img,0))
+img = (np.expand_dims(img, 0))
 predictions_single = model.predict(img)
 plot_value_array(0, predictions_single, test_labels)
 plt.xticks(range(10), class_names, rotation=45)
